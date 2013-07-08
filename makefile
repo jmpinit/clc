@@ -17,7 +17,7 @@ INCLUDES = -Isrc$(S)inc -I/usr/local/include -I/usr/include/lua5.1
 OBJECTS = $(patsubst %,$(OBJDIR)$(S)%,$(SOURCES:.c=.o))
 
 CFLAGS := -Wall -pedantic -std=c99 -g -O0 -gstabs
-LFLAGS =  -L/usr/local/lib -llua5.1
+LFLAGS =  -L/usr/local/lib -llua5.1 -lncurses
 CC := gcc
 
 all: $(PROG)

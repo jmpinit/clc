@@ -5,58 +5,75 @@
 
 #include "le.h"
 
+WINDOW * mainwin;
+char *msg = NULL;
+
+void cleanup() {
+	free(msg);
+
+	// ncurses
+	delwin(mainwin);
+	endwin();
+	refresh();
+}
+
 int main(int argc, char *argv[]) {
 	int cookie;
-	int i;
-	char *msg = NULL;
+	
+	double xmin, xmax;
 
-	if (!le_init()) {
+	// error checks
+
+	if(!le_init()) {
 		printf("can't init LE\n");
-		return 1;
+		exit(1);
 	}
-	if (argc<2) {
-		printf("Usage: t-le \"expression\"\n");
-		return 1;
+
+	if(argc != 4) {
+		printf("Usage: clc xmin xmax \"expression\"\n");
+		exit(1);
 	}
-	cookie = le_loadexpr(argv[1], &msg);
-	if (msg) {
+
+	xmin = atof(argv[1]);
+	xmax = atof(argv[2]);
+	
+	if(xmin >= xmax) {
+		printf("xmax must be greater than xmin\n");
+		exit(1);
+	}
+
+	cookie = le_loadexpr(argv[3], &msg);
+	if(msg) {
 		printf("can't load: %s\n", msg);
-		free(msg);
-		return 1;
-	}
-	printf("  x    %s\n"
-			"------ --------\n", argv[1]);
-	for (i=0; i<11; ++i) {
-		double x = i/10.;
-		double y;
-
-		le_setvar("x",x);
-		y = le_eval(cookie, &msg);
-		if (msg) {
-			printf("can't eval: %s\n", msg);
-			free(msg);
-			return 1;
-		}
-		printf("%6.2f %.3f\n", x,y);
+		exit(1);
 	}
 
-/*
-	WINDOW * mainwin;
+	// initialization
+	atexit(cleanup);
 
-	// initialize ncurses
+	// ncurses
 	if((mainwin = initscr()) == NULL) {
 		fprintf(stderr, "Error initialising ncurses.\n");
 		exit(EXIT_FAILURE);
 	}
 
-	mvaddstr(13, 33, "Hello, world!");
+	int width, height;
+	getmaxyx(mainwin, height, width);
+	for(int col = 0; col < width; col++) {
+		le_setvar("x", col);
+
+		int y = le_eval(cookie, &msg);
+
+		mvaddch(y, col, 'x');
+
+		if (msg) {
+			printf("can't eval: %s\n", msg);
+			exit(1);
+		}
+	}
+
 	refresh();
 	sleep(3);
-
-	delwin(mainwin);
-	endwin();
-	refresh();
-*/
 
 	return EXIT_SUCCESS;
 }
