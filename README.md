@@ -12,4 +12,5 @@ clc takes a Lua expression and graphs its output in the terminal using ncurses. 
 
 Credits
 -------
-[SO user RBerteig](http://stackoverflow.com/users/68204/rberteig) [for great example code](http://stackoverflow.com/a/1152648) to evaluate Lua expressions.
+
+* _[SO user RBerteig](http://stackoverflow.com/users/68204/rberteig)_ [for great example code](http://stackoverflow.com/a/1152648) to evaluate Lua expressions.
