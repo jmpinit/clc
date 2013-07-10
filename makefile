@@ -23,7 +23,7 @@ CC := gcc
 all: $(PROG)
 
 test: $(PROG)
-	./bin/clc 0 1 0 1 "4*math.sin(x/2)+6"
+	./bin/clc 0 6.28 0 2 "1+math.sin(x)"
 
 run: $(PROG)
 	bin$(S)$(PROG)
