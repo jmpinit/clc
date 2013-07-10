@@ -60,7 +60,7 @@ void point(int x, int y) {
 
 		picture[celly*pic_width/2+cellx] |= block;
 	} else {
-		printf("point(%d, %d) out of bounds.\n", x, y);
+		//printf("point(%d, %d) out of bounds.\n", x, y);
 	}
 }
 
@@ -124,12 +124,20 @@ int main(int argc, char *argv[]) {
 	picture = calloc(pic_width*pic_height/4, sizeof(int8_t));
 	for(int i=0; i<pic_width*pic_height/4; i++) picture[i] = 0;
 
-	for(int x = 0; x < pic_width; x++) {
+	double xrange = xmax - xmin;
+	double yrange = ymax - ymin;
+	
+	double xscale = xrange / pic_width;		// px per unit
+	double yscale = yrange / pic_height; 	// px per unit
+
+	for(int px = 0; px < pic_width; px++) {
+		double x = xmin + px * xscale;
 		le_setvar("x", x);
 
-		int y = le_eval(cookie, &msg);
+		double y = le_eval(cookie, &msg);
+		int py = y / yscale;
 
-		point(x, y);
+		point(px, py);
 
 		if (msg) {
 			printf("can't eval: %s\n", msg);
