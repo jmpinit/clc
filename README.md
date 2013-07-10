@@ -3,12 +3,15 @@ Command Line (graphing) Calculator
 
 clc takes a Lua expression and graphs its output in the terminal using ncurses. I often want machine help visualizing a bit of math, but don't want to wait tens of seconds to fire up a heavy-weight tool like Matlab or Processing. This utility is instant but basic.
 
-	bin/clc 0 1 0 1 "2*math.sin(x)+3"
-
-		xx    xxx    xx    xx    xx     xx    xx    xx    xxx    xx    xx    xx     xx    xx
-		  x         x     x  x     x   x     x        x         x     x  x     x   x     x
-	x  x     x   x     x        x         x     x  x     x   x     x        x         x     x
-	 xx    xx     xx    xx    xx    xxx    xx    xx    xx     xx    xx    xx    xxx    xx    xx
+	./bin/clc 0 6.28 0 2 "1+math.sin(x)"
+																								 ▄▄▄▄▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▚▄▄▄▄▖                   
+																						 ▗▄▄▄▀▀▀▀                                 ▝▀▀▀▚▄▄▄            
+																				   ▄▄▄▀▀▀▘                                                ▀▀▀▚▄▄▖     
+																			 ▗▄▄▀▀▀                                                             ▝▀▀▚▄▄
+	▀▀▀▄▄▄                                                             ▗▄▄▞▀▀▘                                                                        
+		  ▀▀▀▄▄▄▖                                                ▄▄▄▞▀▀▘                                                                              
+				▝▀▀▀▄▄▄▄                                 ▗▄▄▄▞▀▀▀                                                                                     
+						▀▀▀▀▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▞▀▀▀▀▘                                                                                            
 
 Credits
 -------
