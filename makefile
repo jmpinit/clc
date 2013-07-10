@@ -22,6 +22,9 @@ CC := gcc
 
 all: $(PROG)
 
+test: $(PROG)
+	./bin/clc 0 1 0 1 "4*math.sin(x/2)+6"
+
 run: $(PROG)
 	bin$(S)$(PROG)
 	
