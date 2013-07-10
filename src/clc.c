@@ -8,9 +8,6 @@
 
 enum { PROG, XMIN, XMAX, YMIN, YMAX, EXP } ARGS;
 
-//char[] lines = { '-', '/', '|', '\\' };
-
-//WINDOW * mainwin;
 char *msg = NULL;
 
 int con_width, con_height;
@@ -23,12 +20,6 @@ int32_t lookup[] = { 32, 0x2598, 0x259D, 0x2580, 0x2596, 0x258C, 0x259E, 0x259B,
 
 void cleanup() {
 	free(msg);
-
-	// ncurses
-	/*delwin(mainwin);
-	endwin();
-	refresh();
-	*/
 }
 
 void printb(int8_t block) {
@@ -119,14 +110,7 @@ int main(int argc, char *argv[]) {
 	// initialization
 	atexit(cleanup);
 
-	// ncurses
-	/*if((mainwin = initscr()) == NULL) {
-		fprintf(stderr, "Error initialising ncurses.\n");
-		exit(EXIT_FAILURE);
-	}*/
-
 	// info
-	//getmaxyx(mainwin, con_height, con_width);
 	struct winsize w;
 	ioctl(0, TIOCGWINSZ, &w);
 
